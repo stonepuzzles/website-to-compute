@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>PuzzleS • My Piece</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      background: linear-gradient(#f6f8ff, #e0e8f0);
+      font-family: 'Helvetica Neue', sans-serif;
+      text-align: center;
+      margin: 0;
+      padding: 2em;
+    }
+
+    .card {
+      background: white;
+      padding: 2em;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      display: inline-block;
+    }
+
+    .card img {
+      width: 200px;
+      border-radius: 10px;
+    }
+
+    .card h2 {
+      margin-top: 1em;
+      color: #222;
+    }
+
+    .card p {
+      font-style: italic;
+      margin: 0.5em 0 1em;
+    }
+
+    button {
+      margin: 0.5em;
+      padding: 0.7em 1.2em;
+      background-color: #ffcad4;
+      border: none;
+      border-radius: 10px;
+      color: #333;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #ffc1cc;
+    }
+
+    .footer {
+      margin-top: 2em;
+      font-size: 0.8em;
+      color: #888;
+    }
+
+    video {
+      margin-top: 1em;
+      display: none;
+      border-radius: 10px;
+      max-width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <h1>🧩 PuzzleS</h1>
+  <div class="card">
+    <img id="member-img" src="https://example.com/assets/images/chaehwa.jpg" alt="PuzzleS Member">
+    <h2 id="member-name">Chaehwa</h2>
+    <p id="message">“This piece is just for you.”</p>
+    <button onclick="playAudio()">🔊 聽語音</button>
+    <button onclick="playVideo()">🎥 看影像</button>
+    <audio id="voice" src="https://example.com/assets/audio/chaehwa.mp3"></audio>
+    <video id="video" controls>
+      <source id="video-src" src="https://example.com/assets/video/chaehwa.mp4" type="video/mp4">
+    </video>
+  </div>
+  <p class="footer">© 2025 PuzzleS. All rights reserved.</p>
+
+  <script>
+    // 根據 URL 參數載入成員資料
+    const memberData = {
+      chaehwa: {
+        name: "Chaehwa",
+        message: "“This piece is just for you.”",
+        image: "https://example.com/assets/images/chaehwa.jpg",
+        audio: "https://example.com/assets/audio/chaehwa.mp3",
+        video: "https://example.com/assets/video/chaehwa.mp4"
+      },
+      alison: {
+        name: "Alison",
+        message: "“Keep dancing with me.”",
+        image: "https://example.com/assets/images/alison.jpg",
+        audio: "https://example.com/assets/audio/alison.mp3",
+        video: "https://example.com/assets/video/alison.mp4"
+      },
+      yeongwon: {
+        name: "Yeongwon",
+        message: "“I'm always with you.”",
+        image: "https://example.com/assets/images/yeongwon.jpg",
+        audio: "https://example.com/assets/audio/yeongwon.mp3",
+        video: "https://example.com/assets/video/yeongwon.mp4"
+      },
+      winnie: {
+        name: "Winnie",
+        message: "“You found the missing piece.”",
+        image: "https://example.com/assets/images/winnie.jpg",
+        audio: "https://example.com/assets/audio/winnie.mp3",
+        video: "https://example.com/assets/video/winnie.mp4"
+      }
+    };
+
+    const params = new URLSearchParams(window.location.search);
+    const memberKey = params.get('member') || 'chaehwa';
+
+    if (memberData[memberKey]) {
+      const data = memberData[memberKey];
+      document.getElementById("member-name").textContent = data.name;
+      document.getElementById("message").textContent = data.message;
+      document.getElementById("member-img").src = data.image;
+      document.getElementById("voice").src = data.audio;
+      document.getElementById("video-src").src = data.video;
+      document.getElementById("video").load();
+    }
+
+    function playAudio() {
+      document.getElementById("voice").play();
+    }
+
+    function playVideo() {
+      const video = document.getElementById("video");
+      video.style.display = "block";
+      video.play();
+    }
+  </script>
+</body>
+</html>
